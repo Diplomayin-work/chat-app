@@ -109,6 +109,13 @@ userSchema.statics.getUsers = async function () {
     }
 }
 
+userSchema.methods.toJSON = function() {
+    let obj = this.toObject();
+    delete obj.password;
+    delete obj._id;
+    return obj
+}
+
 userSchema.pre('save', async function (next) {
 
     const user = this
